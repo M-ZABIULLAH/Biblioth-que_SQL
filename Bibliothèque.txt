@@ -1,0 +1,48 @@
+Sub Create_Tables()
+
+DoCmd.RunSQL "CREATE TABLE Livre(" & _
+   "ID INT," & _
+   "Titre VARCHAR(50)," & _
+   "Catégorie VARCHAR(50)," & _
+   "Date_de_Publication DATE," & _
+   "PRIMARY KEY(ID)" & _
+");"   
+
+DoCmd.RunSQL "CREATE TABLE Auteurs(" & _
+   "ID INT," & _
+   "Prénom VARCHAR(50)," & _
+   "PRIMARY KEY(ID)" & _
+");"   
+
+DoCmd.RunSQL "CREATE TABLE Membres(" & _
+   "ID INT," & _
+   "Nom VARCHAR(50)," & _
+   "Prénom VARCHAR(50)," & _
+   "Date_d_inscription DATE," & _
+   "Email VARCHAR(50)," & _
+   "PRIMARY KEY(ID)" & _
+");"   
+
+DoCmd.RunSQL "CREATE TABLE Emprunts(" & _
+   "ID INT," & _
+   "ID_LIVRE INT," & _
+   "ID_Membre INT," & _
+   "Date_d_emprunt DATE," & _
+   "Date_de_Retour DATE," & _
+   "Statut LOGICAL," & _
+   "ID_1 INT NOT NULL," & _
+   "ID_2 INT NOT NULL," & _
+   "PRIMARY KEY(ID)," & _
+   "FOREIGN KEY(ID_1) REFERENCES Livre(ID)," & _
+   "FOREIGN KEY(ID_2) REFERENCES Membres(ID)" & _
+");"   
+
+DoCmd.RunSQL "CREATE TABLE Écrit_par(" & _
+   "ID INT," & _
+   "ID_1 INT," & _
+   "PRIMARY KEY(ID, ID_1)," & _
+   "FOREIGN KEY(ID) REFERENCES Livre(ID)," & _
+   "FOREIGN KEY(ID_1) REFERENCES Auteurs(ID)" & _
+");"   
+
+End Sub
